@@ -1,15 +1,3 @@
-/*
-Universidade Federal da Fronteira Sul
-Trabalho 3 de Computação Gráfica
-Alunos: Doglas André Finco
-		Patrick De Bastiani
-
-
-Objective:
-• Choose one of the presented techniques and make a screensaver related to UFFS.
-	- Technique: Reflection.
-*/
-
 // Include standard headers
 #include <stdio.h>
 #include <stdlib.h>
@@ -264,7 +252,7 @@ int main( void )
 		setMVP(
 			reflect1.projectionMatrix,
 			reflect1.viewMatrix,
-			translate(mat4(), vec3(sin(currentTime), 0, 0)) * translate(mat4(), vec3(-1.25f, 0, 0)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0)) * scale(mat4(), vec3(0.1, 0.1, 0.1))
+			translate(mat4(), vec3(sin(currentTime)*2, 0, 0)) * translate(mat4(), vec3(0, 0, 0)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0)) * scale(mat4(), vec3(0.1, 0.1, 0.1))
 		);
 		glUniform3f(textureColor, 0.0, 1.0, 0.0);
 		draw();
@@ -274,10 +262,11 @@ int main( void )
 		reflect2.init();
 
 		float asd1 = (sin(currentTime+3.1415)+1.0)/2.0;
+		asd1*=2;
 		setMVP(
 			reflect2.projectionMatrix,
 			reflect2.viewMatrix,
-			translate(mat4(), vec3(1.25f,-0.4,0)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0)) * scale(mat4(), vec3(asd1*0.05+0.12, asd1*0.04+0.07, asd1*0.05+0.07))
+			translate(mat4(), vec3(0,0,0)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0)) * scale(mat4(), vec3(asd1*0.05+0.12, asd1*0.04+0.07, asd1*0.05+0.07))
 		);
 		
 		glUniform3f(textureColor, 0.0, 1.0, 0.0);
@@ -288,10 +277,11 @@ int main( void )
 		reflect3.init();
 
 		float asd2 = (sin(currentTime)+1.0)/2.0;
+		asd2*=2;
 		setMVP(
 			reflect3.projectionMatrix,
 			reflect3.viewMatrix,
-			translate(mat4(), vec3(1.25f,-0.4,0)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0))  * scale(mat4(), vec3(asd2*0.05+0.12, asd2*0.04+0.07, asd2*0.05+0.07))
+			translate(mat4(), vec3(0,0,0)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0))  * scale(mat4(), vec3(asd2*0.05+0.12, asd2*0.04+0.07, asd2*0.05+0.07))
 		);
 		glUniform3f(textureColor, 0.0, 1.0, 0.0);
 		draw();
@@ -302,7 +292,7 @@ int main( void )
 		setMVP(
 			reflect4.projectionMatrix,
 			reflect4.viewMatrix,
-			glm::mat4(1.0) * translate(mat4(), vec3(-1.25f, 0, 0)) * translate(mat4(), vec3(sin(currentTime), 0, -2)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0)) * scale(mat4(), vec3(0.15, 0.15, 0.15))
+			glm::mat4(1.0) * translate(mat4(), vec3(0, 0, 0)) * translate(mat4(), vec3(sin(currentTime)*2, 0, -2)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0)) * scale(mat4(), vec3(0.15, 0.15, 0.15))
 		);
 		glUniform3f(textureColor, 0.0, 1.0, 0.0);
 		draw();
@@ -313,7 +303,7 @@ int main( void )
 		setMVP(
 			reflect5.projectionMatrix,
 			reflect5.viewMatrix,
-			glm::mat4(1.0) * translate(mat4(), vec3(-1.25f, 0, 0)) * translate(mat4(), vec3(sin(currentTime), 0, -2)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0)) * scale(mat4(), vec3(0.15, 0.15, 0.15))
+			glm::mat4(1.0) * translate(mat4(), vec3(0, 0, 0)) * translate(mat4(), vec3(sin(currentTime)*2, 0, -2)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0)) * scale(mat4(), vec3(0.15, 0.15, 0.15))
 		);
 		glUniform3f(textureColor, 0.0, 1.0, 0.0);
 		draw();
@@ -358,7 +348,7 @@ int main( void )
 		setMVP(
 			getProjectionMatrix(),
 			getViewMatrix(),
-			glm::mat4(1.0) * translate(mat4(), vec3(0, 0, 0)) * translate(mat4(), vec3(sin(currentTime), 0, -2)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0)) * scale(mat4(), vec3(0.15, 0.15, 0.15))
+			glm::mat4(1.0) * translate(mat4(), vec3(0, 0, 0)) * translate(mat4(), vec3(sin(currentTime)*2, 0, -2)) * (glm::mat4)glm::rotate(currentTime*100, 0.0, 1.0, 0.0) * rotate(mat4(), 90.0f, vec3(1, 0, 0)) * scale(mat4(), vec3(0.15, 0.15, 0.15))
 		);
 		glUniform3f(textureColor, 0.0, 1.0, 0.0);
 		draw();

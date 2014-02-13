@@ -1,4 +1,19 @@
 #include "reflection.h"
+#include "wtypes.h"
+
+void GetDesktopResolution1(int& horizontal, int& vertical){
+   RECT desktop;
+   // Get a handle to the desktop window
+   const HWND hDesktop = GetDesktopWindow();
+   // Get the size of screen to the variable desktop
+   GetWindowRect(hDesktop, &desktop);
+   // The top left corner will have coordinates (0,0)
+   // and the bottom right corner will have coordinates
+   // (horizontal, vertical)
+   horizontal = desktop.right;
+   vertical = desktop.bottom;
+}
+
 
 Reflection::Reflection(double width, double height, glm::mat4 transformation){
 	this->width = width;
@@ -57,14 +72,18 @@ Reflection::Reflection(double width, double height, glm::mat4 transformation){
 	// "Bind" the newly created texture : all future texture functions will modify this texture
 	glBindTexture(GL_TEXTURE_2D, renderedTexture);
 	// Give an empty image to OpenGL ( the last "0" )
-	glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, 1024, 768, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
+	int T_X = 0;
+	int T_Y = 0;
+
+	GetDesktopResolution1(T_X, T_Y);
+	glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, T_X, T_Y, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
 	// Poor filtering. Needed !
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 	glGenRenderbuffers(1, &depthRenderBuffer);
 	glBindRenderbuffer(GL_RENDERBUFFER, depthRenderBuffer);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, 1024, 768);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, T_X, T_Y);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRenderBuffer);
 
 	// Set "renderedTexture" as our colour attachement #0
